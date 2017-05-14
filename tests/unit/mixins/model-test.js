@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import UpdateRelationshipsModelMixin from 'ember-data-update-json-api-relationships-independently/mixins/update-relationships-model';
+import UpdateRelationshipsModelMixin from 'ember-data-update-json-api-relationships-independently/mixins/model';
 import { module, test } from 'qunit';
 
-module('Unit | Mixin | update relationships model');
+module('Unit | Mixin | model');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
