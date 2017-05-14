@@ -1,0 +1,23 @@
+<main>
+  <h1>{{article.title}}</h1>
+  <ul>
+    {{#each article.tags as |tag|}}
+      <li>
+        {{tag.name}}
+      </li>
+    {{/each}}
+  </ul>
+  <button type="button" onclick={{action "saveTagsToArticle" article}}>
+    Save
+  </button>
+</main>
+
+
+<ul>
+  {{#each tags as |tag|}}
+    <li>
+      {{tag.name}}
+      <button type="button" onclick={{action "addTag" article tag}}>Add</button>
+    </li>
+  {{/each}}
+</ul>
