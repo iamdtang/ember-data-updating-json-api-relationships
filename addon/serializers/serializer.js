@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 
-let { Mixin, String: { dasherize } } = Ember;
+let { String: { dasherize } } = Ember;
 
-export default Mixin.create({
+export default DS.JSONAPISerializer.extend({
   serialize(snapshot) {
     let serialized = this._super(...arguments);
     let { adapterOptions } = snapshot;

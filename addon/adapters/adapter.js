@@ -1,9 +1,7 @@
-import Ember from 'ember';
+import DS from 'ember-data';
 import { pluralize } from 'ember-inflector';
 
-let { Mixin } = Ember;
-
-export default Mixin.create({
+export default DS.JSONAPIAdapter.extend({
   urlForUpdateRecord(id, modelName, snapshot) {
     let { adapterOptions } = snapshot;
     if (this.urlForUpdateRelationship && adapterOptions) {

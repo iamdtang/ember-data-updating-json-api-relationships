@@ -12,25 +12,25 @@ ember install ember-data-updating-json-api-relationships
 
 ## Getting Started
 
-First, add the adapter mixin to your application or model-specific adapter:
+First, extend the adapter:
 
 ```js
 // app/adapters/application.js
 import DS from 'ember-data';
-import UpdateRelationshipsAdapterMixin from 'ember-data-updating-json-api-relationships/mixins/adapter';
+import JSONAPIAdapter from 'ember-data-updating-json-api-relationships/adapters/adapter';
 
-export default DS.JSONAPIAdapter.extend(UpdateRelationshipsAdapterMixin, {
+export default JSONAPIAdapter.extend({
 });
 ```
 
-Second, add the serializer mixin to your application or model-specific serializer:
+Second, extend the serializer:
 
 ```js
 // app/serializers/application.js
 import DS from 'ember-data';
-import UpdateRelationshipsSerializerMixin from 'ember-data-updating-json-api-relationships/mixins/serializer';
+import JSONAPISerializer from 'ember-data-updating-json-api-relationships/serializers/serializer';
 
-export default DS.JSONAPISerializer.extend(UpdateRelationshipsSerializerMixin, {
+export default JSONAPISerializer.extend({
 });
 ```
 
@@ -39,11 +39,11 @@ Third, add the model mixin to the model with the relationship that you want to u
 ```js
 // app/models/article.js
 import DS from 'ember-data';
-import UpdateRelationshipsModelMixin from 'ember-data-updating-json-api-relationships/mixins/model';
+import ModelMixin from 'ember-data-updating-json-api-relationships/mixins/model';
 
 let { Model, attr, hasMany, belongsTo } = DS;
 
-export default Model.extend(UpdateRelationshipsModelMixin, {
+export default Model.extend(ModelMixin, {
   title: attr('string'),
   tags: hasMany(),
   author: belongsTo()
@@ -73,8 +73,9 @@ This addon will set relationship URLs to what is recommended in the spec, so som
 // app/adapters/article.js
 export default ApplicationAdapter.extend({
   urlForUpdateRelationship(id, modelName, snapshot, relationshipToUpdate) {
+    let { host, namespace } = this;
     if (relationshipToUpdate === 'tags') {
-      return `/articles/${id}/categories`;
+      return `${host}/${namespace}/articles/${id}/categories`;
     }
   }
 })

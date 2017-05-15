@@ -2,11 +2,11 @@ import { moduleForModel, test } from 'ember-qunit';
 import Pretender from 'pretender';
 import Ember from 'ember';
 import DS from 'ember-data';
-import AdapterMixin from 'ember-data-updating-json-api-relationships/mixins/adapter';
 import ModelMixin from 'ember-data-updating-json-api-relationships/mixins/model';
+import Adapter from 'ember-data-updating-json-api-relationships/adapters/adapter';
 
 let { run, getOwner } = Ember;
-let { JSONAPIAdapter, Model, hasMany, belongsTo } = DS;
+let { Model, hasMany, belongsTo } = DS;
 
 moduleForModel('article', 'Unit | Model | article', {
   needs: [
@@ -133,7 +133,7 @@ test('updating a to-one relationship', function(assert) {
 
 test('updating a relationship with a custom URL using urlForUpdateRelationship', function(assert) {
   let done = assert.async();
-  let ApplicationAdapter = JSONAPIAdapter.extend(AdapterMixin);
+  let ApplicationAdapter = Adapter.extend();
   getOwner(this).register('adapter:article', ApplicationAdapter.extend({
     urlForUpdateRelationship(id, modelName, snapshot, relationshipToUpdate) {
       if (relationshipToUpdate === 'tags') {
