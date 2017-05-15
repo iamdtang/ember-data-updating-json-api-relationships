@@ -1,6 +1,6 @@
 import Model from 'ember-data/model';
 import DS from 'ember-data';
-import UpdateRelationshipsModelMixin  from 'ember-data-updating-json-api-relationships/mixins/model';
+import UpdateRelationshipsModelMixin from 'ember-data-updating-json-api-relationships/mixins/model';
 
 let { attr, hasMany, belongsTo } = DS;
 

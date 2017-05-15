@@ -15,9 +15,9 @@ ember install ember-data-updating-json-api-relationships
 First, add the adapter mixin to your application or model-specific adapter:
 
 ```js
-// app/adapaters/application.js
+// app/adapters/application.js
 import DS from 'ember-data';
-import UpdateRelationshipsAdapterMixin  from 'ember-data-updating-json-api-relationships/mixins/adapter';
+import UpdateRelationshipsAdapterMixin from 'ember-data-updating-json-api-relationships/mixins/adapter';
 
 export default DS.JSONAPIAdapter.extend(UpdateRelationshipsAdapterMixin, {
 });
@@ -28,7 +28,7 @@ Second, add the serializer mixin to your application or model-specific serialize
 ```js
 // app/serializers/application.js
 import DS from 'ember-data';
-import UpdateRelationshipsSerializerMixin  from 'ember-data-updating-json-api-relationships/mixins/serializer';
+import UpdateRelationshipsSerializerMixin from 'ember-data-updating-json-api-relationships/mixins/serializer';
 
 export default DS.JSONAPISerializer.extend(UpdateRelationshipsSerializerMixin, {
 });
@@ -39,7 +39,7 @@ Third, add the model mixin to the model with the relationship that you want to u
 ```js
 // app/models/article.js
 import DS from 'ember-data';
-import UpdateRelationshipsModelMixin  from 'ember-data-updating-json-api-relationships/mixins/model';
+import UpdateRelationshipsModelMixin from 'ember-data-updating-json-api-relationships/mixins/model';
 
 let { Model, attr, hasMany, belongsTo } = DS;
 
