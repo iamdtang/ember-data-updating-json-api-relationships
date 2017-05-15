@@ -1,9 +1,12 @@
 {
   "name": "ember-data-updating-json-api-relationships",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Updating JSON:API relationships in Ember Data",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "json:api",
+    "ember-data",
+    "updating relationships"
   ],
   "license": "MIT",
   "author": "",
