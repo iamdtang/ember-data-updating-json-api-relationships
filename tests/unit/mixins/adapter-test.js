@@ -75,3 +75,20 @@ test(`urlForUpdateRecord() when updating a to-many relationship and
   let url = adapter.urlForUpdateRecord('1', 'article', snapshot);
   assert.equal(url, 'foo');
 });
+
+test(`urlForUpdateRecord() dasherizes the relationship name for the path`, function(assert) {
+  let BaseAdapter = Ember.Object.extend({
+    urlForUpdateRecord(id) {
+      return `http://myapi.com/api/v1/articles/${id}`;
+    }
+  });
+  let Adapter = BaseAdapter.extend(UpdateRelationshipsAdapterMixin);
+  let adapter = Adapter.create();
+  let snapshot = {
+    adapterOptions: {
+      relationshipToUpdate: 'myTags'
+    }
+  };
+  let url = adapter.urlForUpdateRecord('1', 'article', snapshot);
+  assert.equal(url, 'http://myapi.com/api/v1/articles/1/relationships/my-tags');
+});

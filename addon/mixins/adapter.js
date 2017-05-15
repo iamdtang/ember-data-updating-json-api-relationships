@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
-export default Ember.Mixin.create({
+let { Mixin, String: { dasherize } } = Ember;
+
+export default Mixin.create({
   urlForUpdateRecord(id, modelName, snapshot) {
     let { adapterOptions } = snapshot;
     if (this.urlForUpdateRelationship && adapterOptions) {
@@ -10,7 +12,8 @@ export default Ember.Mixin.create({
     let originalUpdateURL = this._super(...arguments);
     if (adapterOptions && adapterOptions.relationshipToUpdate) {
       let { relationshipToUpdate } = adapterOptions;
-      return `${originalUpdateURL}/relationships/${relationshipToUpdate}`;
+      let path = dasherize(relationshipToUpdate);
+      return `${originalUpdateURL}/relationships/${path}`;
     }
 
     return originalUpdateURL;
