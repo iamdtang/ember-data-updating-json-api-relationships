@@ -12,7 +12,7 @@
   </button>
 </main>
 
-
+<h2>Add Tags</h2>
 <ul>
   {{#each tags as |tag|}}
     <li>
@@ -21,3 +21,6 @@
     </li>
   {{/each}}
 </ul>
+
+<h2>Add Author</h2>
+<button type="button" onclick={{action "addAuthor" article}}>Add Author 1</button>

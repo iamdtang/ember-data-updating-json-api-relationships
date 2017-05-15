@@ -13,6 +13,10 @@ export default Controller.extend({
     },
     addTag(article, tag) {
       article.get('tags').pushObject(tag);
+    },
+    addAuthor(article) {
+      article.set('author', this.store.peekRecord('author', 1));
+      article.updateRelationship('author');
     }
   }
 });

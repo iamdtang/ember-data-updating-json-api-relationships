@@ -28,6 +28,16 @@ export default Ember.Route.extend({
       ]
     });
 
+    this.store.push({
+      data: {
+        id: 1,
+        type: 'author',
+        attributes: {
+          name: 'David'
+        }
+      }
+    });
+
     return this.store.push({
       data: {
         id: 1,

@@ -1,10 +1,8 @@
 [![Build Status](https://travis-ci.org/skaterdav85/ember-data-updating-json-api-relationships.svg?branch=master)](https://travis-ci.org/skaterdav85/ember-data-updating-json-api-relationships)
 
-WIP
-
 # ember-data-updating-json-api-relationships
 
-This addon adds support to Ember Data to update relationships independently. See [Updating Relationships in the JSON:API spec](http://jsonapi.org/format/#crud-updating-relationships) for more details.
+This addon adds support to Ember Data to update relationships independently. See [Updating Relationships in the JSON:API spec](http://jsonapi.org/format/#crud-updating-relationships) for more details. This library works for updating to-one and to-many relationships, as described in the JSON:API spec.
 
 ## Installation
 
@@ -51,7 +49,7 @@ export default Model.extend(UpdateRelationshipsModelMixin, {
 });
 ```
 
-Lastly, call `updateRelationship()` on your model:
+Lastly, call `updateRelationship(relationship)` on your model:
 
 ```js
 article.get('tags').pushObject(tag1);
@@ -59,4 +57,9 @@ article.get('tags').pushObject(tag2);
 
 // PATCH /articles/:id/relationships/tags
 article.updateRelationship('tags');
+
+article.set('author', author);
+
+// PATCH /articles/:id/relationships/author
+article.updateRelationship('author');
 ```
