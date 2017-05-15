@@ -1,12 +1,14 @@
 import Ember from 'ember';
 
-export default Ember.Mixin.create({
+let { Mixin, String: { dasherize } } = Ember;
+
+export default Mixin.create({
   serialize(snapshot) {
     let serialized = this._super(...arguments);
     let { adapterOptions } = snapshot;
     if (adapterOptions && adapterOptions.relationshipToUpdate) {
-      let { relationshipToUpdate } = adapterOptions;
-      return serialized.data.relationships[relationshipToUpdate];
+      let relationshipKey = dasherize(adapterOptions.relationshipToUpdate);
+      return serialized.data.relationships[relationshipKey];
     }
 
     return serialized;

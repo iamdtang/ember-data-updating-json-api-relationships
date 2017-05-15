@@ -3,8 +3,10 @@ import Pretender from 'pretender';
 import Ember from 'ember';
 import DS from 'ember-data';
 import AdapterMixin from 'ember-data-updating-json-api-relationships/mixins/adapter';
+import ModelMixin from 'ember-data-updating-json-api-relationships/mixins/model';
 
 let { run, getOwner } = Ember;
+let { JSONAPIAdapter, Model, hasMany, belongsTo } = DS;
 
 moduleForModel('article', 'Unit | Model | article', {
   needs: [
@@ -67,6 +69,30 @@ moduleForModel('article', 'Unit | Model | article', {
   }
 });
 
+test('updating a record retains original behavior', function(assert) {
+  let done = assert.async();
+  run(() => {
+    this.server.patch('/articles/1', function(request) {
+      let payload = JSON.parse(request.requestBody);
+      assert.deepEqual(payload, {
+        data: {
+          id: '1',
+          type: 'articles',
+          attributes: {
+            title: 'Hello, Ember!'
+          }
+        }
+      });
+      done();
+      return [ 200, {}, JSON.stringify('') ];
+    });
+    let store = this.store();
+    let article = store.peekRecord('article', 1);
+    article.set('title', 'Hello, Ember!');
+    article.save();
+  });
+});
+
 test('updating a to-many relationship', function(assert) {
   let done = assert.async();
   this.server.patch('/articles/1/relationships/tags', function(request) {
@@ -105,9 +131,9 @@ test('updating a to-one relationship', function(assert) {
   });
 });
 
-test('updating a relationship with a custom URL', function(assert) {
+test('updating a relationship with a custom URL using urlForUpdateRelationship', function(assert) {
   let done = assert.async();
-  let ApplicationAdapter = DS.JSONAPIAdapter.extend(AdapterMixin);
+  let ApplicationAdapter = JSONAPIAdapter.extend(AdapterMixin);
   getOwner(this).register('adapter:article', ApplicationAdapter.extend({
     urlForUpdateRelationship(id, modelName, snapshot, relationshipToUpdate) {
       if (relationshipToUpdate === 'tags') {
@@ -131,4 +157,42 @@ test('updating a relationship with a custom URL', function(assert) {
   article.get('tags').pushObject(store.peekRecord('tag', 1));
   article.get('tags').pushObject(store.peekRecord('tag', 2));
   article.updateRelationship('tags');
+});
+
+test('updating a relationship where the relationship name is different than the related type', function(assert) {
+  let done = assert.async();
+  let store = this.store();
+
+  run(() => {
+    getOwner(this).register('model:post', Model.extend(ModelMixin, {
+      postCategories: hasMany('tag'),
+      author: belongsTo()
+    }));
+
+    let post = store.push({
+      data: {
+        id: 1,
+        type: 'post',
+        attributes: {
+          title: 'Post 1'
+        }
+      }
+    });
+
+    this.server.patch('/posts/1/relationships/tags', function(request) {
+      let payload = JSON.parse(request.requestBody);
+      assert.deepEqual(payload, {
+        data: [
+          { id: '1', type: 'tags' },
+          { id: '2', type: 'tags' }
+        ]
+      });
+      done();
+      return [ 200, {}, JSON.stringify('') ];
+    });
+
+    post.get('postCategories').pushObject(store.peekRecord('tag', 1));
+    post.get('postCategories').pushObject(store.peekRecord('tag', 2));
+    post.updateRelationship('postCategories');
+  });
 });

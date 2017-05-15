@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import { pluralize } from 'ember-inflector';
 
-let { Mixin, String: { dasherize } } = Ember;
+let { Mixin } = Ember;
 
 export default Mixin.create({
   urlForUpdateRecord(id, modelName, snapshot) {
@@ -12,7 +13,8 @@ export default Mixin.create({
     let originalUpdateURL = this._super(...arguments);
     if (adapterOptions && adapterOptions.relationshipToUpdate) {
       let { relationshipToUpdate } = adapterOptions;
-      let path = dasherize(relationshipToUpdate);
+      let relationship = this._getRelationship(relationshipToUpdate, snapshot);
+      let path = this._normalizeRelationshipPath(relationship.type, relationship.kind);
       return `${originalUpdateURL}/relationships/${path}`;
     }
 
@@ -27,5 +29,22 @@ export default Mixin.create({
       });
     }
     return promise;
+  },
+  _getRelationship(relationshipToUpdate, snapshot) {
+    let relationshipDescriptor;
+    snapshot.eachRelationship((name, relationship) => {
+      if (name === relationshipToUpdate) {
+        relationshipDescriptor = relationship;
+      }
+    });
+
+    return relationshipDescriptor;
+  },
+  _normalizeRelationshipPath(type, relationshipKind) {
+    if (relationshipKind === 'hasMany') {
+      return pluralize(type);
+    }
+
+    return type;
   }
 });
