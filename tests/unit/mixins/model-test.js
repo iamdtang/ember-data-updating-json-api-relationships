@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import UpdateRelationshipsModelMixin from 'ember-data-update-json-api-relationships-independently/mixins/model';
+import UpdateRelationshipsModelMixin from 'ember-data-updating-json-api-relationships/mixins/model';
 import { module, test } from 'qunit';
 
 module('Unit | Mixin | model');

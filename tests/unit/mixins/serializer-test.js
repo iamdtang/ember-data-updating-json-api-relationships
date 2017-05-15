@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import UpdateRelationshipsSerializerMixin from 'ember-data-update-json-api-relationships-independently/mixins/serializer';
+import UpdateRelationshipsSerializerMixin from 'ember-data-updating-json-api-relationships/mixins/serializer';
 import { module, test } from 'qunit';
 
 module('Unit | Mixin | serializer');

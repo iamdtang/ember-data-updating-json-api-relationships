@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-data-update-json-api-relationships-independently'
+  name: 'ember-data-updating-json-api-relationships'
 };
