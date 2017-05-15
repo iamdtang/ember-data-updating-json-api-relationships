@@ -137,7 +137,7 @@ test('updating a relationship with a custom URL using urlForUpdateRelationship',
   getOwner(this).register('adapter:article', ApplicationAdapter.extend({
     urlForUpdateRelationship(id, modelName, snapshot, relationshipToUpdate) {
       if (relationshipToUpdate === 'tags') {
-        return `${modelName}s/${id}/categories`;
+        return `/${modelName}s/${id}/categories`;
       }
     }
   }));
