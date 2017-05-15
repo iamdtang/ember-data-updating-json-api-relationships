@@ -2,8 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
   urlForUpdateRecord(id, modelName, snapshot) {
-    let originalUpdateURL = this._super(...arguments);
     let { adapterOptions } = snapshot;
+    if (this.urlForUpdateRelationship && adapterOptions) {
+      return this.urlForUpdateRelationship(id, modelName, snapshot, adapterOptions.relationshipToUpdate);
+    }
+
+    let originalUpdateURL = this._super(...arguments);
     if (adapterOptions && adapterOptions.relationshipToUpdate) {
       let { relationshipToUpdate } = adapterOptions;
       return `${originalUpdateURL}/relationships/${relationshipToUpdate}`;
