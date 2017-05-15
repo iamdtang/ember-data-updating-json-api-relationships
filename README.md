@@ -64,3 +64,18 @@ article.set('author', author);
 // PATCH /articles/:id/relationships/author
 article.updateRelationship('author');
 ```
+
+## Customizations
+
+This addon will set relationship URLs to what is recommended in the spec, so something like `/articles/:id/relationships/tags`. If you need to override this, use the `urlForUpdateRelationship()` hook:
+
+```js
+// app/adapters/article.js
+export default ApplicationAdapter.extend({
+  urlForUpdateRelationship(id, modelName, snapshot, relationshipToUpdate) {
+    if (relationshipToUpdate === 'tags') {
+      return `/articles/${id}/categories`;
+    }
+  }
+})
+```
