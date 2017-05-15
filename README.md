@@ -41,11 +41,12 @@ Third, add the model mixin to the model with the relationship that you want to u
 import DS from 'ember-data';
 import UpdateRelationshipsModelMixin  from 'ember-data-updating-json-api-relationships/mixins/model';
 
-let { Model, attr, hasMany } = DS;
+let { Model, attr, hasMany, belongsTo } = DS;
 
 export default Model.extend(UpdateRelationshipsModelMixin, {
   title: attr('string'),
-  tags: hasMany()
+  tags: hasMany(),
+  author: belongsTo()
 });
 ```
 
