@@ -1,20 +1,20 @@
 {
   "name": "ember-data-updating-json-api-relationships",
   "version": "0.0.3",
-  "description": "Updating JSON:API relationships in Ember Data",
+  "description": "Updating JSON:API relationships independently in Ember Data",
   "keywords": [
     "ember-addon",
     "json:api",
     "ember-data",
-    "updating relationships"
+    "updating relationships independently"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "David <david@thejsguy.com>",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/skaterdav85/ember-data-updating-json-api-relationships",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
