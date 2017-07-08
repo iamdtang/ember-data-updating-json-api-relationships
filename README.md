@@ -67,6 +67,8 @@ article.updateRelationship('author');
 
 ## Customizations
 
+### Customizing Relationship URLs
+
 This addon will set relationship URLs to what is recommended in the spec, so something like `/articles/:id/relationships/tags` for a to-many relationship and `/articles/:id/relationships/author` for a to-one relationship. If you need to override this, use the `urlForUpdateRelationship()` hook:
 
 ```js
