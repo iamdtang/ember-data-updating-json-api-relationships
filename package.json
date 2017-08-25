@@ -1,6 +1,6 @@
 {
   "name": "ember-data-updating-json-api-relationships",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Updating JSON:API relationships independently in Ember Data",
   "keywords": [
     "ember-addon",
