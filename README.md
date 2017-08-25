@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/skaterdav85/ember-data-updating-json-api-relationships.svg?branch=master)](https://travis-ci.org/skaterdav85/ember-data-updating-json-api-relationships)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-data-updating-json-api-relationships.svg)](https://emberobserver.com/addons/ember-data-updating-json-api-relationships) [![Build Status](https://travis-ci.org/skaterdav85/ember-data-updating-json-api-relationships.svg?branch=master)](https://travis-ci.org/skaterdav85/ember-data-updating-json-api-relationships)
 
 # ember-data-updating-json-api-relationships
 
