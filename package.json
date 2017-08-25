@@ -15,6 +15,8 @@
     "test": "tests"
   },
   "repository": "https://github.com/skaterdav85/ember-data-updating-json-api-relationships",
+  "bugs": "https://github.com/skaterdav85/ember-data-updating-json-api-relationships/issues",
+  "homepage": "https://github.com/skaterdav85/ember-data-updating-json-api-relationships",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
