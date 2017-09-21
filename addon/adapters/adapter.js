@@ -24,6 +24,9 @@ export default DS.JSONAPIAdapter.extend({
     if (adapterOptions && adapterOptions.relationshipToUpdate) {
       return promise.then(() => {
         return null;
+      })
+      .catch((error) => {
+        throw error;
       });
     }
     return promise;
